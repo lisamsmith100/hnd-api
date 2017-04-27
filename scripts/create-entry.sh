@@ -1,4 +1,8 @@
 #!/bin/bash
+#TITLE="first shot at creating an entry for user 4" BACKSTORY="Backstory is that this is a class project deuce" sh scripts/create-entry.sh
+#TITLE="second shot at creating an entry for user 4" BACKSTORY="Backstory is that this is a class project deuce" sh scripts/create-entry.sh
+#TITLE="third shot at creating an entry for user 4" BACKSTORY="Backstory is that this is a class project deuce" sh scripts/create-entry.sh
+#TITLE="fourth shot at creating an entry for user 4" BACKSTORY="Backstory is that this is a class project deuce" sh scripts/create-entry.sh
 
 API="${API_ORIGIN:-http://localhost:4741}"
 URL_PATH="/entries"
@@ -9,26 +13,12 @@ curl "${API}${URL_PATH}" \
   --header "Authorization: Token token=$TOKEN" \
   --data '{
     "entry": {
-      "title": "'"${TEXT}"'"
-      "backstory": "'"${TEXT}"'"
-      "stopper": "'"${TEXT}"'"
-      "status": "'"${TEXT}"'"
-      "deleted_flag": "'"${BOOLEAN}"'"
+      "title": "'"${TITLE}"'",
+      "backstory": "'"${BACKSTORY}"'",
+      "stopper": "'"${STOPPER}"'",
+      "status": "'"${STATUS}"'",
+      "deleted_flag": "'"${DELETED_FLAG}"'"
     }
   }'
 
 echo
-
-# curl request
-curl --include --request POST http://localhost:4741/entries \
-  --header "Content-Type: application/json" \
-  --header "Authorization: Token token=$TOKEN" \
-  --data '{
-    "entry": {
-      "title": "This is my first item in my list",
-      "backstory": "This is an experiment for project 1",
-      "stopper": "Knowing everything I want to know to make this awesome",
-      "status": "open"
-      "deleted_flag": "false"
-    }
-  }'

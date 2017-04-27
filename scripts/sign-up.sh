@@ -1,5 +1,8 @@
 #!/bin/bash
 #EMAIL=firstuser@example.email PASSWORD=passy PASSWORD_CONFIRMATION=passy sh scripts/sign-up.sh
+#EMAIL=seconduser@example.email PASSWORD=passy PASSWORD_CONFIRMATION=passy sh scripts/sign-up.sh
+#EMAIL=thirduser@example.email PASSWORD=passy PASSWORD_CONFIRMATION=passy sh scripts/sign-up.sh
+#EMAIL=fourthuser@example.email PASSWORD=passy PASSWORD_CONFIRMATION=passy sh scripts/sign-up.sh
 
 API="${API_ORIGIN:-http://localhost:4741}"
 URL_PATH="/sign-up"
