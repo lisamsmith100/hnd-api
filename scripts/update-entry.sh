@@ -3,29 +3,71 @@
 #   --header "Content-Type: application/json" \
 #   --data '{
 #     "entry": {
-#       "title": "This is updated through my first update test curl request",
-#       "backstory": "testing to update the backstory",
-#       "stopper": "not sure how to do this",
-#       "status": "not completed",
-#       "date_added": "2017-04-27",
-#       "deleted_flag": "false"
+#       "title": "this is an update"
 #     }
 #   }'
-#ID 3 TITLE="second shot at creating an entry for user 4 UPDATE RUN CURL SCRIPT" sh scripts/update-entry.sh
+# ID=2 TITLE="updating this title with new code"
 API="${API_ORIGIN:-http://localhost:4741}"
-URL_PATH="/entries/"
+URL_PATH="/entries/${ID}"
 curl "${API}${URL_PATH}" \
   --include \
-  --request GET \
-  --header "Authorization: Token token=$TOKEN"
+  --request PATCH \
+  --header "Content-Type: application/json" \
+  # --header "Authorization: Token token=$TOKEN" \
   --data '{
     "entry": {
-      "title": "'"${TITLE}"'",
-      "backstory": "'"${BACKSTORY}"'",
-      "stopper": "'"${STOPPER}"'",
-      "status": "'"${STATUS}"'",
-      "date_added": "'"${DATE_ADDED}"'",
-      "deleted_flag": "'"${DELETED_FLAG}"'"
+      "title": "'"${TITLE}"'"
     }
   }'
-echo
+  #
+  # ,
+  # "backstory": "'"${BACKSTORY}"'",
+  # "stopper": "'"${STOPPER}"'",
+  # "status": "'"${STATUS}"'",
+  # "date_added": "'"${DATE_ADDED}"'",
+  # "deleted_flag": "'"${DELETED_FLAG}"'"
+
+#   #!/bin/bash
+#
+# API="${API_ORIGIN:-http://localhost:4741}"
+# URL_PATH="/patients/${ID}"
+# curl "${API}${URL_PATH}" \
+#   --include \
+#   --request PATCH \
+#   --header "Content-Type: application/json" \
+#   --data '{
+#     "patient": {
+#       "diagnosis": "'"${DIAGNOSIS}"'"
+#     }
+#   }'
+#   #\
+#   # --header "Authorization: Token token=$TOKEN"
+#
+# echo
+
+# t.string   "title"
+# t.string   "backstory"
+# t.string   "stopper"
+# t.string   "status"
+# t.datetime "date_added"
+# t.boolean  "deleted_flag"
+# t.datetime "created_at",   null: false
+# t.datetime "updated_at",   null: false
+
+# curl --include --request PATCH http://localhost:3000/change-password/$ID \
+#   --header "Authorization: Token token=$TOKEN" \
+#   --header "Content-Type: application/json" \
+#   --data '{
+#     "passwords": {
+#       "old": "an example password",
+#       "new": "super sekrit"
+#     }
+#   }'
+#
+# curl --include --request PATCH http://localhost:4741/books/$ID \
+#   --header "Content-Type: application/json" \
+#   --data '{
+# 	"book": {
+# 		"author": "UPDATE"
+# 	}
+# }'
