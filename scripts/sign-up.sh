@@ -1,4 +1,5 @@
 #!/bin/bash
+#EMAIL=firstuser@example.email PASSWORD=passy PASSWORD_CONFIRMATION=passy sh scripts/sign-up.sh
 
 API="${API_ORIGIN:-http://localhost:4741}"
 URL_PATH="/sign-up"
