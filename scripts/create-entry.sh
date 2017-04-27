@@ -17,6 +17,7 @@ curl "${API}${URL_PATH}" \
       "backstory": "'"${BACKSTORY}"'",
       "stopper": "'"${STOPPER}"'",
       "status": "'"${STATUS}"'",
+      "date_added": "'"${DATE_ADDED}"'",
       "deleted_flag": "'"${DELETED_FLAG}"'"
     }
   }'
