@@ -11,9 +11,9 @@
 #       "deleted_flag": "false"
 #     }
 #   }'
-
+#ID 3 TITLE="second shot at creating an entry for user 4 UPDATE RUN CURL SCRIPT" sh scripts/update-entry.sh
 API="${API_ORIGIN:-http://localhost:4741}"
-URL_PATH="/entries/:id"
+URL_PATH="/entries/"
 curl "${API}${URL_PATH}" \
   --include \
   --request GET \
