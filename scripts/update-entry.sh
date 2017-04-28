@@ -6,7 +6,7 @@
 #       "title": "this is an update"
 #     }
 #   }'
-# ID=7 TITLE="updating this title with new code" BACKSTORY="this is an updated backstory" STOPPER="this is not updating" STATUS="incomplete" DATE_ADDED="2017-04-27" DELETED_FLAG=false sh scripts/update-entry.sh
+# ID=5 TITLE="abcdefghijklmnopqrstuvwxyz" BACKSTORY="this is an updated backstory" STOPPER="this is not updating" STATUS="incomplete" DATE_ADDED="2017-04-27" DELETED_FLAG=false sh scripts/update-entry.sh
 # :backstory, :stopper, :status, :date_added, :deleted_flag
 API="${API_ORIGIN:-http://localhost:4741}"
 URL_PATH="/entries"

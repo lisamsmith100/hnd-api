@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EntriesController < ApplicationController
+class EntriesController < ProtectedController
   before_action :set_entry, only: [:show, :update, :destroy]
 
   # GET /entries
@@ -56,7 +56,7 @@ class EntriesController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def entry_params
-    params.require(:entry).permit(:title, :backstory, :stopper, :status, :date_added, :deleted_flag)
+    params.require(:entries).permit(:id, :title, :backstory, :stopper, :status, :date_added, :deleted_flag)
     # , :backstory, :stopper, :status, :date_added, :deleted_flag
   end
 end
