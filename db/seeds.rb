@@ -8,3 +8,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+lisashopesanddreams = Entry.create([{ title: 'Retire', backstory: 'want to stop working after working whole life', stopper: 'money to survive', status: 'open'}, { title: 'Sail Around The World'}, { title: 'Visit China' }, { title: 'Visit Angor Wat'}, { title: 'Diving in Red Sea'}])

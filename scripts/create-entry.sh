@@ -13,7 +13,7 @@ curl "${API}${URL_PATH}" \
   --header "Authorization: Token token=$TOKEN" \
   --data '{
     "entries": {
-      "title": "'"${TITLE}"'",
+      "title": "'"${TITLE}"'"
       "backstory": "'"${BACKSTORY}"'",
       "stopper": "'"${STOPPER}"'",
       "status": "'"${STATUS}"'",
