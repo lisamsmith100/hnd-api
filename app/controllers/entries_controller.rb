@@ -11,16 +11,18 @@ class EntriesController < ApplicationController
   end
 
   # GET /entries/1
+  # GET /entries/1.json
   def show
-    render json: @entry
+    render json: Entry.find(params[:id])
   end
 
   # POST /entries
   def create
-    @entry = Entry.new(entry_params)
+    @entry = current_user.entries.build(entry_params)
 
     if @entry.save
-      render json: @entry, status: :created, location: @entry
+      render json: @entry, status: :created
+      # , location: @entry
     else
       render json: @entry.errors, status: :unprocessable_entity
     end
@@ -28,8 +30,9 @@ class EntriesController < ApplicationController
 
   # PATCH/PUT /entries/1
   def update
+    # @entry = current_user.entries.build(entry_params)
     if @entry.update(entry_params)
-      render json: @entry
+      # render json: @entry
       head :no_content
     else
       render json: @entry.errors, status: :unprocessable_entity
@@ -47,13 +50,12 @@ class EntriesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_entry
-    @entry = Entry.find(params[:id])
+    @entry = current_user.entries.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
   def entry_params
     params.require(:entry).permit(:title)
-    # :id, :date_added, :deleted_flag
-    # update this later?
+        # , :backstory, :stopper, :status, :date_added, :deleted_flag
   end
 end

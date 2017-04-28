@@ -46,6 +46,8 @@ class UsersController < ProtectedController
 
   def index
     render json: User.all
+    @entries_of_user = @user.entries
+    @entries_of_user.build
   end
 
   def show

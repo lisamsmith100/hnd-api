@@ -6,68 +6,22 @@
 #       "title": "this is an update"
 #     }
 #   }'
-# ID=2 TITLE="updating this title with new code"
+# ID=1 TITLE="updating this title with new code" BACKSTORY="this is an updated backstory" STOPPER="this is not updating" STATUS="incomplete" DATE_ADDED="2017-04-27" DELETED_FLAG=false sh scripts/update-entry.sh
+# :backstory, :stopper, :status, :date_added, :deleted_flag
 API="${API_ORIGIN:-http://localhost:4741}"
-URL_PATH="/entries/${ID}"
+URL_PATH="/entries/$ID"
 curl "${API}${URL_PATH}" \
   --include \
   --request PATCH \
+  --header "Authorization: Token token=$TOKEN" \
   --header "Content-Type: application/json" \
-  # --header "Authorization: Token token=$TOKEN" \
   --data '{
-    "entry": {
+    "entries": {
       "title": "'"${TITLE}"'"
+      "backstory": "'"${BACKSTORY}"'",
+      "stopper": "'"${STOPPER}"'",
+      "status": "'"${STATUS}"'",
+      "date_added": "'"${DATE_ADDED}"'",
+      "deleted_flag": "'"${DELETED_FLAG}"'"
     }
   }'
-  #
-  # ,
-  # "backstory": "'"${BACKSTORY}"'",
-  # "stopper": "'"${STOPPER}"'",
-  # "status": "'"${STATUS}"'",
-  # "date_added": "'"${DATE_ADDED}"'",
-  # "deleted_flag": "'"${DELETED_FLAG}"'"
-
-#   #!/bin/bash
-#
-# API="${API_ORIGIN:-http://localhost:4741}"
-# URL_PATH="/patients/${ID}"
-# curl "${API}${URL_PATH}" \
-#   --include \
-#   --request PATCH \
-#   --header "Content-Type: application/json" \
-#   --data '{
-#     "patient": {
-#       "diagnosis": "'"${DIAGNOSIS}"'"
-#     }
-#   }'
-#   #\
-#   # --header "Authorization: Token token=$TOKEN"
-#
-# echo
-
-# t.string   "title"
-# t.string   "backstory"
-# t.string   "stopper"
-# t.string   "status"
-# t.datetime "date_added"
-# t.boolean  "deleted_flag"
-# t.datetime "created_at",   null: false
-# t.datetime "updated_at",   null: false
-
-# curl --include --request PATCH http://localhost:3000/change-password/$ID \
-#   --header "Authorization: Token token=$TOKEN" \
-#   --header "Content-Type: application/json" \
-#   --data '{
-#     "passwords": {
-#       "old": "an example password",
-#       "new": "super sekrit"
-#     }
-#   }'
-#
-# curl --include --request PATCH http://localhost:4741/books/$ID \
-#   --header "Content-Type: application/json" \
-#   --data '{
-# 	"book": {
-# 		"author": "UPDATE"
-# 	}
-# }'

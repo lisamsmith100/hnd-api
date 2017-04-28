@@ -1,8 +1,8 @@
 #!/bin/bash
-#TITLE="first shot at creating an entry for user 4" BACKSTORY="Backstory is that this is a class project deuce" sh scripts/create-entry.sh
-#TITLE="second shot at creating an entry for user 4" BACKSTORY="Backstory is that this is a class project deuce" sh scripts/create-entry.sh
-#TITLE="third shot at creating an entry for user 4" BACKSTORY="Backstory is that this is a class project deuce" sh scripts/create-entry.sh
-#TITLE="fourth shot at creating an entry for user 4" BACKSTORY="Backstory is that this is a class project deuce" sh scripts/create-entry.sh
+#TITLE="first entry for user id 1" BACKSTORY="Backstory is that this is a class project deuce" STOPPER="update isn't working still" STATUS="open" sh scripts/create-entry.sh
+#TITLE="second entry for user id 1" BACKSTORY="Backstory is that this is a class project deuce" STOPPER="update isn't working still" STATUS="open" sh scripts/create-entry.sh
+#TITLE="third entry for user id 1" BACKSTORY="Backstory is that this is a class project deuce" STOPPER="update isn't working still" STATUS="open" sh scripts/create-entry.sh
+#TITLE="fourth entry for user id 1" BACKSTORY="Backstory is that this is a class project deuce" STOPPER="update isn't working still" STATUS="open" sh scripts/create-entry.sh
 
 API="${API_ORIGIN:-http://localhost:4741}"
 URL_PATH="/entries"
@@ -12,7 +12,7 @@ curl "${API}${URL_PATH}" \
   --header "Content-Type: application/json" \
   --header "Authorization: Token token=$TOKEN" \
   --data '{
-    "entry": {
+    "entries": {
       "title": "'"${TITLE}"'",
       "backstory": "'"${BACKSTORY}"'",
       "stopper": "'"${STOPPER}"'",
@@ -23,3 +23,14 @@ curl "${API}${URL_PATH}" \
   }'
 
 echo
+
+# curl --include --request POST http://localhost:4741/entries \
+#   --header "Content-Type: application/json" \
+#   --data '{
+#     "entry": {
+#       "title": "this is a new entry",
+#       "backstory": "working on this project, I am trying to solve a problem",
+#       "stopper": "thrashing, lack of knowledge, staring at screen too long?",
+#       "status": "unsolved"
+#     }
+#   }'
