@@ -30,10 +30,8 @@ class EntriesController < ProtectedController
 
   # PATCH/PUT /entries/1
   def update
-    @entry = Entry.find(params)[:id]
-
     if @entry.update(entry_params)
-      # render json: @entry
+      render json: @entry
       head :no_content
     else
       render json: @entry.errors, status: :unprocessable_entity
