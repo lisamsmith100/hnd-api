@@ -1,7 +1,7 @@
 #!/bin/bash
 #TITLE="first entry for user id 1" BACKSTORY="Backstory is that this is a class project deuce" STOPPER="update isn't working still" STATUS="open" sh scripts/create-entry.sh
 #TITLE="second entry for user id 1" BACKSTORY="Backstory is that this is a class project deuce" STOPPER="update isn't working still" STATUS="open" sh scripts/create-entry.sh
-#TITLE="third entry for user id 1" BACKSTORY="Backstory is that this is a class project deuce" STOPPER="update isn't working still" STATUS="open" sh scripts/create-entry.sh
+#TITLE="third entry for user id 2" BACKSTORY="Backstory is that this is a class project deuce" STOPPER="update isn't working still" STATUS="open" sh scripts/create-entry.sh
 #TITLE="fourth entry for user id 1" BACKSTORY="Backstory is that this is a class project deuce" STOPPER="update isn't working still" STATUS="open" sh scripts/create-entry.sh
 
 API="${API_ORIGIN:-http://localhost:4741}"
@@ -12,13 +12,8 @@ curl "${API}${URL_PATH}" \
   --header "Content-Type: application/json" \
   --header "Authorization: Token token=$TOKEN" \
   --data '{
-    "entries": {
-      "title": "'"${TITLE}"'",
-      "backstory": "'"${BACKSTORY}"'",
-      "stopper": "'"${STOPPER}"'",
-      "status": "'"${STATUS}"'",
-      "date_added": "'"${DATE_ADDED}"'",
-      "deleted_flag": "'"${DELETED_FLAG}"'"
+    "entry": {
+      "title": "'"${TITLE}"'"
     }
   }'
 

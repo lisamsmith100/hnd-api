@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EntriesController < ApplicationController
+class EntriesController < ProtectedController
   before_action :set_entry, only: [:show, :update, :destroy]
 
   # GET /entries
@@ -30,10 +30,8 @@ class EntriesController < ApplicationController
 
   # PATCH/PUT /entries/1
   def update
-    @entry = Entry.find(params)[:id]
-
     if @entry.update(entry_params)
-      # render json: @entry
+      render json: @entry
       head :no_content
     else
       render json: @entry.errors, status: :unprocessable_entity
