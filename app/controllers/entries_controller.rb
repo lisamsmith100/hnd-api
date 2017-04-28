@@ -13,7 +13,7 @@ class EntriesController < ApplicationController
   # GET /entries/1
   # GET /entries/1.json
   def show
-    render json: Entry.find(params[:id])
+    render json: @entry
   end
 
   # POST /entries
@@ -30,7 +30,8 @@ class EntriesController < ApplicationController
 
   # PATCH/PUT /entries/1
   def update
-    # @entry = current_user.entries.build(entry_params)
+    @entry = Entry.find(params)[:id]
+
     if @entry.update(entry_params)
       # render json: @entry
       head :no_content
@@ -55,7 +56,7 @@ class EntriesController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def entry_params
-    params.require(:entry).permit(:title)
-        # , :backstory, :stopper, :status, :date_added, :deleted_flag
+    params.require(:entry).permit(:title, :backstory, :stopper, :status, :date_added, :deleted_flag)
+    # , :backstory, :stopper, :status, :date_added, :deleted_flag
   end
 end
