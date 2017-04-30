@@ -18,7 +18,7 @@ echo
 
 #   --header "Content-Type: application/json" \
 #   --data '{
-# 	"entr": {
+# 	"entry": {
 # 		"author": "UPDATE"
 # 	}
 # }'
