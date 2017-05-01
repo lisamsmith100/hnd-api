@@ -5,14 +5,14 @@ class EntriesController < ProtectedController
 
   # GET /entries
   def index
-    @entries = Entry.all
-
+    @entries = current_user.entries.all
+    # @entries = @entries.sort_by(&:date_added :id)
     render json: @entries
   end
 
   # GET /entries/1
-  # GET /entries/1.json
   def show
+    @entry = current_user.entry.all
     render json: @entry
   end
 
@@ -21,7 +21,7 @@ class EntriesController < ProtectedController
     @entry = current_user.entries.build(entry_params)
 
     if @entry.save
-      render json: @entry, status: :created
+      render json: @entry, status: :created, location: @entry
       # , location: @entry
     else
       render json: @entry.errors, status: :unprocessable_entity
