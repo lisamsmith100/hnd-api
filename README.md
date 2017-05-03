@@ -1,24 +1,31 @@
 [![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
 
-# rails-api-template
+# Hopes and Dreams
 
-A template for starting projects with `rails-api`. Includes authentication.
+  An app for a list of whatever -- your hopes, your dreams, everything inbetween.
 
-At the beginning of each cohort, update the versions in [`Gemfile`](Gemfile).
+  - Live app: [Hopes and Dreams](https://lisamsmith100.github.io/hnd-client/)
+  - Live API: [HND API](https://hnd-api.herokuapp.com/)
+  - API repo on GitHub: [lisamsmith100/hnd-api](https://github.com/lisamsmith100/hnd-api)
 
-## Dependencies
+  ## About Hopes and Dreams
 
-Install with `bundle install`.
+  [Hopes And Dreams](https://lisamsmith100.github.io/hnd-client/) lets users generate a list of any type of item.  The list can be created from the browser, updated, and deleted.
 
--   [`rails-api`](https://github.com/rails-api/rails-api)
--   [`rails`](https://github.com/rails/rails)
--   [`active_model_serializers`](https://github.com/rails-api/active_model_serializers)
--   [`ruby`](https://www.ruby-lang.org/en/)
--   [`postgres`](http://www.postgresql.org)
+  Hopes and Dreams is built using HTML, Javascript, CSS, Handlebars and relies on a Rails API/Postgres to persist data. Code for that API can be found at [lisamsmith100 api](https://github.com/lisamsmith100/hnd-api).
 
-Until Rails 5 is released, this template should follow the most recent released
-version of Rails 4, as well as track `master` branches for `rails-api` and
-`active_model_serializers`.
+  ## Data Model
+
+  An entity relationship diagram is available at [here](http://imgur.com/8BPw6qv).
+
+  Resources include:
+
+  - Users
+  - Entries
+
+  - The project culminated from a project practice homework assignment[here](https://github.com/ga-wdi-boston/full-stack-project-practice/pull/48).
+
+## Setup & Dependencies
 
 ## Installation
 
@@ -45,256 +52,254 @@ version of Rails 4, as well as track `master` branches for `rails-api` and
     db:nuke_pave`.
 1.  Run the API server with `bin/rails server` or `bundle exec rails server`.
 
-## Structure
 
-This template follows the standard project structure in Rails 4.
+## Dependencies
 
-`curl` command scripts are stored in [`scripts`](scripts) with names that
-correspond to API actions.
+    Install with `bundle install`.
 
-User authentication is built-in.
+    -   [`rails-api`](https://github.com/rails-api/rails-api)
+    -   [`rails`](https://github.com/rails/rails)
+    -   [`active_model_serializers`](https://github.com/rails-api/active_model_serializers)
+    -   [`ruby`](https://www.ruby-lang.org/en/)
+    -   [`postgres`](http://www.postgresql.org)
 
-## Tasks
+    Until Rails 5 is released, this template should follow the most recent released
+    version of Rails 4, as well as track `master` branches for `rails-api` and
+    `active_model_serializers`.
 
-Developers should run these often!
+### Local setup
 
--   `bin/rake routes` lists the endpoints available in your API.
--   `bin/rake test` runs automated tests.
--   `bin/rails console` opens a REPL that pre-loads the API.
--   `bin/rails db` opens your database client and loads the correct database.
--   `bin/rails server` starts the API.
--   `scripts/*.sh` run various `curl` commands to test the API. See below.
+    -   `touch .env`
+    -   `SECRET_TOKEN=$(bundle exec rake secret) >> .env`
+    -   `SECRET_KEY_BASE_DEVELOPMENT=$(bundle exec rake secret) >> .env`
 
-<!-- TODO -   `rake nag` checks your code style. -->
-<!-- TODO -   `rake lint` checks your code for syntax errors. -->
+    ## Tests
 
-## API
+    `curl` command scripts for all actions are stored in [`scripts`](scripts) with names that
+    correspond to API actions.
 
-Use this as the basis for your own API documentation. Add a new third-level
-heading for your custom entities, and follow the pattern provided for the
-built-in user authentication documentation.
+    Note that in order to run the upload script, you must run it from within the scripts directory.
 
-Scripts are included in [`scripts`](scripts) to test built-in actions. Add your
-own scripts to test your custom API. As an alternative, you can write automated
-tests in RSpec to test your API.
 
-### Authentication
+    ## API
 
-| Verb   | URI Pattern            | Controller#Action |
-|--------|------------------------|-------------------|
-| POST   | `/sign-up`             | `users#signup`    |
-| POST   | `/sign-in`             | `users#signin`    |
-| PATCH  | `/change-password/:id` | `users#changepw`  |
-| DELETE | `/sign-out/:id`        | `users#signout`   |
+    Scripts are included in [`scripts`](scripts) to test actions.
 
-#### POST /sign-up
+  ### Authentication
 
-Request:
+  | Verb   | URI Pattern            | Controller#Action |
+  |--------|------------------------|-------------------|
+  | POST   | `/sign-up`             | `users#signup`    |
+  | POST   | `/sign-in`             | `users#signin`    |
+  | PATCH  | `/change-password/:id` | `users#changepw`  |
+  | DELETE | `/sign-out/:id`        | `users#signout`   |
 
-```sh
-curl http://localhost:4741/sign-up \
-  --include \
-  --request POST \
-  --header "Content-Type: application/json" \
-  --data '{
-    "credentials": {
-      "email": "'"${EMAIL}"'",
-      "password": "'"${PASSWORD}"'",
-      "password_confirmation": "'"${PASSWORD}"'"
-    }
-  }'
-```
+  #### POST /sign-up
 
-```sh
-EMAIL=ava@bob.com PASSWORD=hannah scripts/sign-up.sh
-```
+  Request:
 
-Response:
+  ```sh
+  curl http://localhost:4741/sign-up \
+    --include \
+    --request POST \
+    --header "Content-Type: application/json" \
+    --data '{
+      "credentials": {
+        "email": "'"${EMAIL}"'",
+        "password": "'"${PASSWORD}"'",
+        "password_confirmation": "'"${PASSWORD}"'"
+      }
+    }'
+  ```
 
-```md
-HTTP/1.1 201 Created
-Content-Type: application/json; charset=utf-8
+  ```sh
+  EMAIL=ava@bob.com PASSWORD=hannah scripts/sign-up.sh
+  ```
 
-{
-  "user": {
-    "id": 1,
-    "email": "ava@bob.com"
-  }
-}
-```
+  Response:
 
-#### POST /sign-in
+  ```md
+  HTTP/1.1 201 Created
+  Content-Type: application/json; charset=utf-8
 
-Request:
-
-```sh
-curl http://localhost:4741/sign-in \
-  --include \
-  --request POST \
-  --header "Content-Type: application/json" \
-  --data '{
-    "credentials": {
-      "email": "'"${EMAIL}"'",
-      "password": "'"${PASSWORD}"'"
-    }
-  }'
-```
-
-```sh
-EMAIL=ava@bob.com PASSWORD=hannah scripts/sign-in.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
-
-{
-  "user": {
-    "id": 1,
-    "email": "ava@bob.com",
-    "token": "BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f"
-  }
-}
-```
-
-#### PATCH /change-password/:id
-
-Request:
-
-```sh
-curl --include --request PATCH "http://localhost:4741/change-password/$ID" \
-  --header "Authorization: Token token=$TOKEN" \
-  --header "Content-Type: application/json" \
-  --data '{
-    "passwords": {
-      "old": "'"${OLDPW}"'",
-      "new": "'"${NEWPW}"'"
-    }
-  }'
-```
-
-```sh
-ID=1 OLDPW=hannah NEWPW=elle TOKEN=BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f scripts/change-password.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 204 No Content
-```
-
-#### DELETE /sign-out/:id
-
-Request:
-
-```sh
-curl http://localhost:4741/sign-out/$ID \
-  --include \
-  --request DELETE \
-  --header "Authorization: Token token=$TOKEN"
-```
-
-```sh
-ID=1 TOKEN=BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f scripts/sign-out.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 204 No Content
-```
-
-### Users
-
-| Verb | URI Pattern | Controller#Action |
-|------|-------------|-------------------|
-| GET  | `/users`    | `users#index`     |
-| GET  | `/users/1`  | `users#show`      |
-
-#### GET /users
-
-Request:
-
-```sh
-curl http://localhost:4741/users \
-  --include \
-  --request GET \
-  --header "Authorization: Token token=$TOKEN"
-```
-
-```sh
-TOKEN=BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f scripts/users.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
-
-{
-  "users": [
-    {
-      "id": 2,
-      "email": "bob@ava.com"
-    },
-    {
+  {
+    "user": {
       "id": 1,
       "email": "ava@bob.com"
     }
-  ]
-}
-```
-
-#### GET /users/:id
-
-Request:
-
-```sh
-curl --include --request GET http://localhost:4741/users/$ID \
-  --header "Authorization: Token token=$TOKEN"
-```
-
-```sh
-ID=2 TOKEN=BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f scripts/user.sh
-```
-
-Response:
-
-```md
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
-
-{
-  "user": {
-    "id": 2,
-    "email": "bob@ava.com"
   }
-}
-```
+  ```
+  #### POST /sign-in
 
-### Reset Database without dropping
+  Request:
 
-This is not a task developers should run often, but it is sometimes necessary.
+  ```sh
+  curl http://localhost:4741/sign-in \
+    --include \
+    --request POST \
+    --header "Content-Type: application/json" \
+    --data '{
+      "credentials": {
+        "email": "'"${EMAIL}"'",
+        "password": "'"${PASSWORD}"'"
+      }
+    }'
+  ```
 
-**locally**
+  ```sh
+  EMAIL=ava@bob.com PASSWORD=hannah scripts/sign-in.sh
+  ```
 
-```sh
-bin/rake db:migrate VERSION=0
-bin/rake db:migrate db:seed db:examples
-```
+  Response:
 
-**heroku**
+  ```md
+  HTTP/1.1 200 OK
+  Content-Type: application/json; charset=utf-8
 
-```sh
-heroku run rake db:migrate VERSION=0
-heroku run rake db:migrate db:seed db:examples
-```
+  {
+    "user": {
+      "id": 1,
+      "email": "ava@bob.com",
+      "token": "BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f"
+    }
+  }
+  ```
+
+  #### PATCH /change-password/:id
+
+  Request:
+
+  ```sh
+  curl --include --request PATCH "http://localhost:4741/change-password/$ID" \
+    --header "Authorization: Token token=$TOKEN" \
+    --header "Content-Type: application/json" \
+    --data '{
+      "passwords": {
+        "old": "'"${OLDPW}"'",
+        "new": "'"${NEWPW}"'"
+      }
+    }'
+  ```
+
+  ```sh
+  ID=1 OLDPW=hannah NEWPW=elle TOKEN=BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f scripts/change-password.sh
+  ```
+
+  Response:
+
+  ```md
+  HTTP/1.1 204 No Content
+  ```
+  #### DELETE /sign-out/:id
+
+  Request:
+
+  ```sh
+  curl http://localhost:4741/sign-out/$ID \
+    --include \
+    --request DELETE \
+    --header "Authorization: Token token=$TOKEN"
+  ```
+
+  ```sh
+  ID=1 TOKEN=BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f scripts/sign-out.sh
+  ```
+
+  Response:
+
+  ```md
+  HTTP/1.1 204 No Content
+  ```
+
+  ### Users
+
+  | Verb | URI Pattern | Controller#Action |
+  |------|-------------|-------------------|
+  | GET  | `/users`    | `users#index`     |
+  | GET  | `/users/1`  | `users#show`      |
+
+  #### GET /users
+
+  Request:
+
+  ```sh
+  curl http://localhost:4741/users \
+    --include \
+    --request GET \
+    --header "Authorization: Token token=$TOKEN"
+  ```
+
+  ```sh
+  TOKEN=BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f scripts/users.sh
+  ```
+
+  Response:
+
+  ```md
+  HTTP/1.1 200 OK
+  Content-Type: application/json; charset=utf-8
+
+  {
+    "users": [
+      {
+        "id": 2,
+        "email": "bob@ava.com"
+      },
+      {
+        "id": 1,
+        "email": "ava@bob.com"
+      }
+    ]
+  }
+  ```
+
+  #### GET /users/:id
+
+  Request:
+
+  ```sh
+  curl --include --request GET http://localhost:4741/users/$ID \
+    --header "Authorization: Token token=$TOKEN"
+  ```
+
+  ```sh
+  ID=2 TOKEN=BAhJIiVlZDIwZTMzMzQzODg5NTBmYjZlNjRlZDZlNzYxYzU2ZAY6BkVG--7e7f77f974edcf5e4887b56918f34cd9fe293b9f scripts/user.sh
+  ```
+
+  Response:
+
+  ```md
+  HTTP/1.1 200 OK
+  Content-Type: application/json; charset=utf-8
+
+  {
+    "user": {
+      "id": 2,
+      "email": "bob@ava.com"
+    }
+  }
+  ```
+
+  ### Reset Database without dropping
+
+  This is not a task developers should run often, but it is sometimes necessary.
+
+  **locally**
+
+  ```sh
+  bin/rake db:migrate VERSION=0
+  bin/rake db:migrate db:seed db:examples
+  ```
+
+  **heroku**
+
+  ```sh
+  heroku run rake db:migrate VERSION=0
+  heroku run rake db:migrate db:seed db:examples
+  ```
 
 ## [License](LICENSE)
 
-1.  All content is licensed under a CC­BY­NC­SA 4.0 license.
-1.  All software code is licensed under GNU GPLv3. For commercial use or
-    alternative licensing, please contact legal@ga.co.
+    1.  All content is licensed under a CC­BY­NC­SA 4.0 license.
+    1.  All software code is licensed under GNU GPLv3. For commercial use or
+        alternative licensing, please contact legal@ga.co.
