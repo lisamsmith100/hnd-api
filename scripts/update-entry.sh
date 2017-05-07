@@ -42,3 +42,5 @@ curl "${API}${URL_PATH}/${ID}" \
  # "status": "'"${STATUS}"'",
  # "date_added": "'"${DATE_ADDED}"'",
  # "deleted_flag": "'"${DELETED_FLAG}"'"
+
+#TOKEN=BAhJIiU1MGQ3YjczZmJjNGMzNzA1YmRmMTgwZDk2NDk0NjI1NAY6BkVG--17a534caff923a08cf35d7c9158c2409f054ecbd ID=36 TITLE="updated curl request" BACKSTORY="this is the update curl request" sh scripts/update-entry.sh

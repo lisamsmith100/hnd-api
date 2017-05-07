@@ -19,3 +19,5 @@ curl "${API}${URL_PATH}" \
   }'
 
 echo
+
+#EMAIL=resub PASSWORD=passy sh scripts/sign-in.sh

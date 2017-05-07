@@ -19,3 +19,5 @@ curl "${API}${URL_PATH}" \
   }'
 
 echo
+
+#EMAIL=resub PASSWORD=passy PASSWORD_CONFIRMATION=passy sh scripts/sign-up.sh
