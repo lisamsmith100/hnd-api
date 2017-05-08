@@ -10,11 +10,11 @@ class EntriesController < ProtectedController
     render json: @entries
   end
 
-  # GET /entries/1
-  def show
-    @entry = current_user.entry.all
-    render json: @entry
-  end
+  # # GET /entries/1
+  # def show
+  #   @entry = current_user.entry.all
+  #   render json: @entry
+  # end
 
   # POST /entries
   def create
