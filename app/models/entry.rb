@@ -1,9 +1,10 @@
 # frozen_string_literal: true
+
 class Entry < ApplicationRecord
   belongs_to :user
   # , class_name: 'User', foreign_key: 'user_id'
   # validations
-  validates :title, presence: true
+  validates :title, :presence => true, :on => :create
   validates :user_id, presence: true
 end
 #
